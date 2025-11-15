@@ -16,7 +16,7 @@ const ReposList = ( { nomeUsuario } ) => {
                 setRepos(resJson);
             }, 3000)
         })
-    }, [nomeUsuario]) // quando iniciar tudo
+    }, [nomeUsuario]) 
     
     return (
         <div className="container">
