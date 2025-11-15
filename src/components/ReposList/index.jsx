@@ -1,0 +1,46 @@
+import { useEffect, useState } from "react";
+
+import styles from "./ReposList.module.css";
+
+const ReposList = ( { nomeUsuario } ) => {
+    const [repos, setRepos] = useState([])
+    const [estaCarregando, setEstaCarregando] = useState(true)
+
+    useEffect(() => {
+        setEstaCarregando(true);
+        fetch(`https://api.github.com/users/${nomeUsuario}/repos`) // fetch é usado para fazer requisições externas
+        .then(resposta => resposta.json())
+        .then(resJson => {
+            setTimeout(() => {
+                setEstaCarregando(false);
+                setRepos(resJson);
+            }, 3000)
+        })
+    }, [nomeUsuario]) // quando iniciar tudo
+    
+    return (
+        <div className="container">
+        {estaCarregando ? (
+            <h2>Carregando...</h2>
+        ) : (
+        <ul className={styles.list}>
+            {repos.map(({ id, name, language, html_url }) => ( 
+                <li className={styles.listItem} key={id}> 
+                    <div className={styles.itemName}>
+                    <b>Nome:</b> 
+                        {name} 
+                    </div>
+                    <div className={styles.itemLanguage}>
+                    <b>Linguagem:</b> 
+                        {language} 
+                    </div>
+                    <a className={styles.itemLink} target="_blank" href={html_url}>Visitar no Github</a> {/* target="_blank" para abrir em outra janela */}
+                </li>
+            ))}
+        </ul>
+        )}
+        </div>
+    )
+}
+{/**/}{/*L:16 "repositorio" é a key do map "repos" */}{/*L:19 todas essas informações vão ser inseridas pelo arquivo json */}
+export default ReposList;

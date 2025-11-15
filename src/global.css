@@ -1,0 +1,17 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 960px;
+    width: 100%;
+    margin: 0, auto;
+}
+
+:root {
+    --cor-Principal: #34495e;
+    --cor-Secundaria: #ecf0f1;
+    --cor-Botao: #646cff;
+}
